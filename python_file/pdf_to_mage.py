@@ -1,15 +1,22 @@
 import os
 import fitz
 import argparse
+import numpy as np
 from time import sleep
 from pathlib import Path
 from rich.console import Console
+from table_crop import Crop
 
 class Converter:
 
     def __init__(self, args, console)-> None:
         self.args = args
         self.console = console
+        
+    def _pix2np(self, pix):
+        im = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.h, pix.w, pix.n)
+        im = np.ascontiguousarray(im[..., [2, 1, 0]])  # rgb to bgr
+        return im
 
     def _convert(self, pdf_file, save_path):
         
@@ -23,11 +30,15 @@ class Converter:
             pix = page.get_pixmap(matrix=magnify)  # render page to an image
             with console.status("[bold green]Working on tasks...") as status:
                 # Create a file name to store the image
-                
                 filename = f"{os.path.basename(pdf_file).split('.')[0]}"
                 sleep(0.3)
                 # Save the image of the page in system
-                pix.save(save_path + "/" + f"{filename}-{page.number + 1}.png", "png")
+                file_name = save_path + "/" + f"{filename}-{page.number + 1}.png"
+                pix = self._pix2np(pix)
+                crop_image = Crop(pix)
+                pix = crop_image.execute(file_name)
+                # pix.save(save_path + "/" + f"{filename}-{page.number + 1}.png", "png")
+                # cv.imwrite(save_path + "/" + f"{filename}-{page.number + 1}.png", pix)
                 console.log(f"page {page_number} of {pdf_file} complete", style="orange1")
                 
     def _execute(self):
