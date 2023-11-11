@@ -20,3 +20,4 @@ designed for Named Entity Recognition (NER).
 We split the processed data into training and testing sets.
 ### Training NER Model with Spacy
 We train a Named Entity Recognition (NER) model using Spacy.
+![best](https://github.com/PhilippeMitch/Data-Extraction-With-OCR-NER/blob/main/image/traning.jpg)
