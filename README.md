@@ -2,6 +2,8 @@
 
 ### Create data
 We created about 30 boarding pass with some random information usinf google doc, and then download the doc into pdf format.
+
+![best](https://github.com/PhilippeMitch/Data-Extraction-With-OCR-NER/blob/main/image/diagram.png)
 ### Extract data
 We converted the pdf file into multiple images, and then use Pytesseract to extract the text from each of the boarding images.
 
