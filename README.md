@@ -10,6 +10,8 @@ data for entity extraction and then save it into a csv file.
 ### Manual Labeling with BIO Tagging
 We use BIO tagging to annotate each word or token in the text with a label indicating whether it is the
 beginning of an entity, inside an entity, or outside any entity.
+
+![best](https://github.com/PhilippeMitch/Data-Extraction-With-OCR-NER/blob/main/image/add_tag.jpg)
 ### Text Cleaning
 After manually labeling the data using BIO tagging, To ensure high-quality training data, we perform text cleaning on the extracted text. This
 involves removing any extra white spaces and eliminating special characters that are not relevant for training the model.
@@ -20,4 +22,5 @@ designed for Named Entity Recognition (NER).
 We split the processed data into training and testing sets.
 ### Training NER Model with Spacy
 We train a Named Entity Recognition (NER) model using Spacy.
+
 ![best](https://github.com/PhilippeMitch/Data-Extraction-With-OCR-NER/blob/main/image/traning.jpg)
