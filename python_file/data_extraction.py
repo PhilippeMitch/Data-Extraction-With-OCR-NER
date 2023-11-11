@@ -21,7 +21,7 @@ class Extract:
         self.console = console
         self.args = args
 
-    def clean_text(self):
+    def clean_text(self, txt):
         whitespace = string.whitespace
         punctuation = "!#$%&\'()*+:;<=>?[\\]^`{|}~"
         tableWhitespace = str.maketrans('','',whitespace)
@@ -47,7 +47,7 @@ class Extract:
                 img_content_df = pd.DataFrame(img_content_list[1:],columns=img_content_list[0])
                 img_content_df.dropna(inplace=True)
                 img_content_df['conf'] = img_content_df['conf'].astype(int)
-                valuable_data_df = img_content_df.query('conf >= 30')
+                valuable_data_df = img_content_df.query('conf >= 15')
                 # Dataframe
                 boarding_form = pd.DataFrame()
                 boarding_form['text'] = valuable_data_df['text']

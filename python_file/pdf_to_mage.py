@@ -1,6 +1,7 @@
 import os
 import fitz
 import argparse
+import cv2 as cv
 import numpy as np
 from time import sleep
 from pathlib import Path
@@ -34,11 +35,13 @@ class Converter:
                 sleep(0.3)
                 # Save the image of the page in system
                 file_name = save_path + "/" + f"{filename}-{page.number + 1}.png"
-                pix = self._pix2np(pix)
-                crop_image = Crop(pix)
-                pix = crop_image.execute(file_name)
-                # pix.save(save_path + "/" + f"{filename}-{page.number + 1}.png", "png")
-                # cv.imwrite(save_path + "/" + f"{filename}-{page.number + 1}.png", pix)
+                if self.args.is_crop:
+                    pix = self._pix2np(pix)
+                    crop_image = Crop(pix)
+                    pix = crop_image.execute(file_name)
+                else:
+                    pix.save(save_path + "/" + f"{filename}-{page.number + 1}.png", "png")
+                    #cv.imwrite(save_path + "/" + f"{filename}-{page.number + 1}.png", pix)
                 console.log(f"page {page_number} of {pdf_file} complete", style="orange1")
                 
     def _execute(self):
@@ -54,6 +57,8 @@ if __name__ == "__main__":
                         help="Path to the pdf file or folder of pdf files")
     parser.add_argument('-o', '--output', type=str, default='../images',
                         help="Path to save the images")
+    parser.add_argument('-c', '--is_crop', type=str, default=False,
+                        help="If you want to crop the table")
 
     args = parser.parse_args()
     console = Console()
