@@ -4,6 +4,8 @@
 We created about 30 boarding pass with some random information usinf google doc, and then download the doc into pdf format.
 ### Extract data
 We converted the pdf file into multiple images, and then use Pytesseract to extract the text from each of the boarding images.
+
+![best](https://github.com/PhilippeMitch/Data-Extraction-With-OCR-NER/blob/main/image/pdf_to_image.jpg)
 ### Text Cleaning and Organization
 Once the text is extracted from the images, we perform basic cleaning procedures to prepare the
 data for entity extraction and then save it into a csv file.
